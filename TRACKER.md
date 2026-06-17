@@ -1,113 +1,45 @@
 # European Open-Weight Model Tracker
 
-> Maintained by [Limes Labs](https://limeslabs.eu). Last updated: June 2026.
+> Maintained by [Limes Labs](https://limeslabs.eu). Last updated: 2026-06-17.
 
-Tracks **European-headquartered or EU-sovereignty-positioned** models with meaningful open weights or open research releases. Not a leaderboard — a **public inventory** for contributors planning evals, fine-tunes, and deployment.
+This is a public inventory for contributors planning evaluations, fine-tunes, and European deployments. It is not a leaderboard and it is not an endorsement list.
 
-**Methodology:** company disclosures, Hugging Face model cards, EU policy reports, [European Open Source AI Index](https://osai-index.eu/), press. "Open-weight" ≠ fully open training data.
+The structured source of truth is [data/models.csv](data/models.csv). This Markdown view highlights the current seed entries and the review standard for future additions.
 
----
+## Tracker fields
 
-## Legend
+Each entry records model identity, release metadata, whether weights are available, licensing, context length, European language notes, training-data transparency, external evaluation links, EuroBench status, safety and deployment notes, and source provenance.
 
-| Tag | Meaning |
-| --- | --- |
-| 🟢 Apache/MIT | Permissive license for weights |
-| 🟡 Custom / research | Restricted commercial or research-only terms |
-| 🔴 API-only | No public weights |
-| 🇪🇺 HQ | EU headquarters |
-| 🏛️ Sovereign | Explicit public-sector / regulated-industry positioning |
+See [docs/schema.md](docs/schema.md) for field definitions and [docs/source-policy.md](docs/source-policy.md) for sourcing rules.
 
----
+## Current inventory
 
-## Frontier & large models
+| Model | Org | Weights | License | Parameters | Context | Languages claimed | EuroBench status | Source checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mixtral 8x7B Instruct v0.1 | Mistral AI | yes | Apache-2.0 | 46.7B total / 12.9B active | 32k tokens | English, French, German, Spanish, Italian | not_run | 2026-06-17 |
+| Mistral NeMo Instruct 2407 | Mistral AI and NVIDIA | yes | Apache-2.0 | 12B | 128k tokens | English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Hindi | not_run | 2026-06-17 |
+| Poro 34B | LumiOpen / Silo AI / TurkuNLP / HPLT | yes | Apache-2.0 | 34.2B | 2048 tokens | Finnish, English, code | not_run | 2026-06-17 |
+| SmolLM2 1.7B Instruct | Hugging Face TB | yes | Apache-2.0 | 1.7B | unknown | English | not_run | 2026-06-17 |
 
-| Model | Org | 🇪🇺 | License | Params | Notes |
-| --- | --- | --- | --- | --- | --- |
-| Mistral Large 3 | Mistral AI (FR) | 🇪🇺 | 🟡 Custom / partial open | 675B MoE | European anchor lab; ASML strategic investment 2026 |
-| Mixtral 8x22B | Mistral AI | 🇪🇺 | 🟢 Apache 2.0 | 141B total | Widely used sovereign fine-tune base |
-| Mistral Small 3.2 | Mistral AI | 🇪🇺 | 🟢 Apache 2.0 | 24B | Strong EU enterprise self-host candidate |
-| Mistral Nemo | Mistral + NVIDIA | 🇪🇺 | 🟢 Apache 2.0 | 12B | Multilingual |
-| Pharia-1 / Pharia-1-LLM-7B | Aleph Alpha (DE) | 🇪🇺 🏛️ | 🟡 Enterprise | 7B–70B | Sovereign enterprise; Cohere merger announced Apr 2026 — verify status |
-| Luminous series | Aleph Alpha | 🇪🇺 | 🟡 | Various | Older open research releases |
-| Viking 33B / Poro | Silo AI / AMD (FI) | 🇪🇺 | 🟢 Apache 2.0 | 7–33B | OpenEuroLLM co-lead |
-| EuroLLM (preview) | OpenEuroLLM consortium | 🇪🇺 | 🟢 Target | 1.7–9B+ | All EU languages; mid-2026 first releases |
-| LightOn Alfred / Paradigm | LightOn (FR) | 🇪🇺 🏛️ | 🟡 | 7–40B | Document / enterprise |
-| TildeOpen LLM | Tilde (LV) | 🇪🇺 | 🟢 Open | 30B | Trained on **LUMI** (2M GPU hours, 2025) |
+## Evaluation hooks
 
----
+Planned Limes evaluation dimensions for European models:
 
-## Mid-size & specialist
+1. Multilingual institutional prose in languages such as Italian, French, German, Spanish, Polish, Finnish, and other EU languages as coverage grows.
+2. Rights-aware QA for GDPR, AI Act, procurement, public-service, and citizen-facing scenarios.
+3. Refusal quality on dual-use prompts without over-refusal on benign administrative tasks.
+4. Constitutional alignment using the [Limes Constitution](https://github.com/Limes-Labs/limes-constitution) rubric.
+5. Citation honesty, including detection of fabricated legal articles, standards, and institutional references.
 
-| Model | Org | License | Focus |
-| --- | --- | --- | --- |
-| Pleias 1.0 | Pleias (FR) | Public domain / fully open data claim | Strict open-data positioning |
-| Moshi | kyutai (FR) | Open research | Real-time voice |
-| Helium | kyutai | Open research | Text |
-| SmolLM2 | Hugging Face (FR HQ) | 🟢 Apache 2.0 | Edge / efficient |
-| vAIst-IT-7B | Var Group (IT) | 🟢 Open-weight | Italian |
-| BgGPT | Bulgaria | Mistral-derived sovereign | Regional |
-| PLLuM | Poland | Sovereign Polish LLM | From-scratch national build |
-| Bielik | Poland | 🟢 Open | Polish sovereign |
-| Apertus | Switzerland | Open-weight | Multilingual Swiss release |
-| ALIA | Spain | Sovereign | Spanish public initiative |
+## Contribution checklist
 
----
+- Add or update the row in [data/models.csv](data/models.csv).
+- Include at least one stable `source_url` for the row.
+- Set `date_checked` to the date you personally checked the source.
+- Use `unknown` where the source does not support a field.
+- Keep publisher claims in `languages_claimed`, `training_data_transparency`, `eval_links`, `safety_notes`, or `deployment_notes`; do not turn them into Limes quality claims.
+- Set `eurobench_status` to `not_run` unless a EuroBench result is linked.
 
-## Code & multimodal (European labs)
+## Watchlist
 
-| Model | Org | Notes |
-| --- | --- | --- |
-| Codestral | Mistral | Code generation |
-| Pixtral | Mistral | Vision-language |
-| Holo2 | H Company (FR) | Computer-use / GUI agents |
-| OriOn | LightOn | Long-context document VLM |
-| Stable LM / SD | Stability AI (UK/EU ops) | Mixed open weights |
-
----
-
-## Infrastructure-dependent training (EuroHPC)
-
-| Project | Compute | Outcome |
-| --- | --- | --- |
-| TildeOpen 30B | LUMI | Released open-weight LLM |
-| OpenEuroLLM | BSC, SURF, LUMI (planned) | Consortium models 2026–2028 |
-| Limes nanogpt experiments | Laptop → IT4LIA path | Char-level / small baseline — [limes-nanogpt](https://github.com/Limes-Labs/limes-nanogpt) |
-
----
-
-## Watchlist (API-first but EU-relevant)
-
-| Org | HQ | Notes |
-| --- | --- | --- |
-| DeepL | DE | Translation / writing; proprietary |
-| Helsing | DE | Defence AI; proprietary |
-| Poolside | FR | Code models; enterprise |
-| Nyonic | DE | Sovereign preview |
-| Cohere EU hub | UK/EU | Command R+; research/commercial mix |
-
----
-
-## Evaluation hooks (eurobench)
-
-Planned Limes eval dimensions for European models:
-
-1. **Multilingual** — IT, FR, DE, ES, PL institutional prose
-2. **Rights-aware QA** — GDPR / AI Act scenario questions
-3. **Refusal quality** — dual-use prompts without over-refusal on benign PA tasks
-4. **Constitutional alignment** — [limes-constitution](https://github.com/Limes-Labs/limes-constitution) rubric
-5. **Citation honesty** — fabricated legal article detection
-
----
-
-## Gaps & next updates
-
-- [ ] Add release dates and Hugging Face repo links per row
-- [ ] Track **OSAI Index** openness scores
-- [ ] Separate **training data openness** column
-- [ ] Monitor Aleph Alpha / Cohere merger impact on Pharia licensing
-- [ ] Add Nordic (Silo/AMD, LUMI ecosystem) monthly diff
-
-## Contribute
-
-PRs welcome with: model name, org, license URL, weight link, date, one-line note + source.
+Candidate rows still need source review before they should be added to the CSV: OpenEuroLLM releases, additional Mistral open-weight releases, Pleias releases, Kyutai releases, Polish and Baltic sovereign models, Italian domain models, and public-sector fine-tunes.
